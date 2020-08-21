@@ -100,9 +100,7 @@ class _TasksScreenState extends State<TasksScreen> {
                 ),
               ),
               child: TaskList(
-                tasks: Provider
-                    .of<TaskData>(context)
-                    .tasks,
+                tasks: Provider.of<TaskData>(context).tasks,
                 change: change,
               ),
             ),
