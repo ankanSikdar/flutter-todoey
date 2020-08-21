@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:todoey/models/task_data.dart';
 
 import 'package:todoey/widgets/task_list.dart';
 import 'package:todoey/screens/add_task_screen.dart';
@@ -11,21 +13,15 @@ class TasksScreen extends StatefulWidget {
 }
 
 class _TasksScreenState extends State<TasksScreen> {
-  List<Task> tasks = [
-    Task(name: 'Buy Milk'),
-    Task(name: 'Buy Sugar'),
-    Task(name: 'Buy Tea'),
-  ];
-
   void change(int index) {
     setState(() {
-      tasks[index].toggleDone();
+      Provider.of<TaskData>(context, listen: false).tasks[index].toggleDone();
     });
   }
 
   void add(String text) {
     setState(() {
-      tasks.add(Task(name: text));
+      Provider.of<TaskData>(context, listen: false).addTask(Task(name: text));
     });
   }
 
@@ -84,7 +80,10 @@ class _TasksScreenState extends State<TasksScreen> {
                   ),
                 ),
                 Text(
-                  '${tasks.length} Tasks',
+                  '${Provider
+                      .of<TaskData>(context)
+                      .tasks
+                      .length} Tasks',
                   style: TextStyle(
                     fontSize: 18,
                     color: Colors.white,
@@ -104,7 +103,9 @@ class _TasksScreenState extends State<TasksScreen> {
                 ),
               ),
               child: TaskList(
-                tasks: tasks,
+                tasks: Provider
+                    .of<TaskData>(context)
+                    .tasks,
                 change: change,
               ),
             ),
