@@ -1,6 +1,8 @@
-# todoey
+# Todoey
+A Flutter App to Create and Manage Todos
 
-A new Flutter application.
+## Screenshots
+<img src="screenshots/ss1.png" width = 250> <img src="screenshots/ss2.png" width = 250> <img src="screenshots/ss3.png" width = 250> 
 
 ## Getting Started
 
