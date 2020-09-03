@@ -13,18 +13,6 @@ class TasksScreen extends StatefulWidget {
 }
 
 class _TasksScreenState extends State<TasksScreen> {
-  void change(int index) {
-    setState(() {
-      Provider.of<TaskData>(context, listen: false).tasks[index].toggleDone();
-    });
-  }
-
-  void add(String text) {
-    setState(() {
-      Provider.of<TaskData>(context, listen: false).addTask(Task(name: text));
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,9 +30,7 @@ class _TasksScreenState extends State<TasksScreen> {
             builder: (context) => SingleChildScrollView(
               padding: EdgeInsets.only(
                   bottom: MediaQuery.of(context).viewInsets.bottom),
-              child: AddTaskScreen(
-                onAdd: add,
-              ),
+              child: AddTaskScreen(),
             ),
             isScrollControlled: true,
           );
@@ -80,7 +66,7 @@ class _TasksScreenState extends State<TasksScreen> {
                   ),
                 ),
                 Text(
-                  '${Provider.of<TaskData>(context).tasks.length} Tasks',
+                  '${Provider.of<TaskData>(context).taskCount()} Tasks',
                   style: TextStyle(
                     fontSize: 18,
                     color: Colors.white,
@@ -99,10 +85,7 @@ class _TasksScreenState extends State<TasksScreen> {
                   topRight: Radius.circular(30.0),
                 ),
               ),
-              child: TaskList(
-                tasks: Provider.of<TaskData>(context).tasks,
-                change: change,
-              ),
+              child: TaskList(),
             ),
           )
         ],
